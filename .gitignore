@@ -1,6 +1,8 @@
-/.bundle
 /dist/main.*.js
 /dist/main.*.js.map
+/dist/main.*.css
+/dist/main.*.css.map
+
 
 /node_modules
 

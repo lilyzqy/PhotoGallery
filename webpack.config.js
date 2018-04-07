@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require("html-Webpack-plugin");
 
 module.exports = {
   entry: './src/entry.jsx',
@@ -40,6 +41,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '*']
   },
   plugins: [
-    new ExtractTextPlugin('[name].[contenthash].css')
+    new ExtractTextPlugin('[name].[contenthash].css'),
+    new HtmlWebpackPlugin()
   ]
 };
