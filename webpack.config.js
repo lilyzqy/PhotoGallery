@@ -35,11 +35,21 @@ module.exports = {
         })
       },
       {
-       test: /\.(png|svg|jpg|gif)$/,
-       use: [
-         'file-loader'
-       ]
-     }
+        test: /\.(jpeg|jpg|png|gif)$/,
+        use: [
+          'file-loader'
+        ]
+      },{
+        test: /\.(svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 125000
+            }
+          }
+        ]
+      }
     ]
   },
   devtool: 'source-map',
