@@ -1,13 +1,14 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: './src/entry.js',
+  entry: './src/entry.jsx',
   output: {
-    filename: 'bundle.js',
+    filename: '[name][chunkhash].js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: [/\.jsx?$/],
         exclude: /(node_modules)/,
