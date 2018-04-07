@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   entry: './src/entry.jsx',
   output: {
-    filename: '[name][chunkhash].js',
+    filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
