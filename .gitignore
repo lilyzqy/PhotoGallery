@@ -1,7 +1,7 @@
-/dist/main.*.js
-/dist/main.*.js.map
-/dist/main.*.css
-/dist/main.*.css.map
+/dist/bundle.js
+/dist/bundle.js.map
+/dist/style.css
+/dist/style.css.map
 
 
 /node_modules
