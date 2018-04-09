@@ -4,14 +4,15 @@
   display: flex;
   margin: auto;
   flex-direction: column;
+  overflow: hidden;
 }
 
-.gallery-upper-slide{
+.gallery-upper-slide-warpper{
   height: 85%;
   width: 100%;
 }
 
-.gallery-lower-thumbnails{
+.gallery-lower-thumbnails-wrapper{
   height: 15%;
   width: 100%;
 }
