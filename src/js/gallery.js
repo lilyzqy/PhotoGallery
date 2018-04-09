@@ -62,7 +62,7 @@ class Gallery extends React.Component{
       const endX= event.clientX;
       const { startX }= this.state;
       const deltaX= startX- endX;
-      const swipeDir= (this.state.beingTouched && deltaX> 0) ? "left" : "right";
+      const swipeDir= (this.state.beingTouched && deltaX< 0) ? "left" : "right";
       this.handleSwipe(undefined,swipeDir);
       this.setState({beingTouched:false});
     };
