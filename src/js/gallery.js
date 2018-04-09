@@ -35,42 +35,35 @@ class Gallery extends React.Component{
     };
   }
 
-  swipeLeft(){
-    let nextIndex = this.state.currentIndex - 1;
+  handleSwipe(e,dir){
+    if(e && !dir){
+      dir = e.currentTarget.className=== "left-arrow" ? "left" : "right";
+    }
+    const delta = dir=== "left"? -1:1;
+    let nextIndex = this.state.currentIndex + delta;
     if(nextIndex < 0){
       nextIndex = this.props.items.length - 1;
-    }
-    this.setState({currentIndex: nextIndex,thumbnailsWidth:this.thumbnailsWrapper.offsetWidth});
-  }
-
-  swipeRight(){
-    let nextIndex = this.state.currentIndex + 1;
-    if(nextIndex > this.props.items.length - 1){
+    }else if(nextIndex > this.props.items.length - 1){
       nextIndex = 0;
     }
     this.setState({currentIndex: nextIndex,thumbnailsWidth:this.thumbnailsWrapper.offsetWidth});
   }
 
-  handleSwiptStart(){
+  handleSwipeStart(){
     return(event)=>{
       this.setState({startX:event.clientX,
                      beingTouched:true});
     };
   }
 
-  handleSwiptEnd(){
+  handleSwipeEnd(){
     return(event)=>{
       const endX = event.clientX;
       const { startX }= this.state;
       const deltaX = startX - endX;
       const swipeDir = (this.state.beingTouched && deltaX > 0) ? "left" : "right";
-      if(swipeDir=== "left"){
-        this.swipeLeft();
-        this.setState({beingTouched:false});
-      }else if (swipeDir=== "right") {
-        this.swipeRight();
-        this.setState({beingTouched:false});
-      }
+      this.handleSwipe(undefined,swipeDir);
+      this.setState({beingTouched:false});
     };
   }
 
@@ -84,10 +77,10 @@ class Gallery extends React.Component{
       const slide = ( isCurrent?
                     <li className="slide"
                         key={index}
-                        onMouseDown={this.handleSwiptStart()}
-                        onMouseUp={this.handleSwiptEnd()}
-                        onTouchStart={this.handleSwiptStart()}
-                        onTouchEnd={this.handleSwiptEnd()}>
+                        onMouseDown={this.handleSwipeStart()}
+                        onMouseUp={this.handleSwipeEnd()}
+                        onTouchStart={this.handleSwipeStart()}
+                        onTouchEnd={this.handleSwipeEnd()}>
                       <img className="slide-image" src={item.url} ></img>
                       <h2 className="slide-caption">{item.caption}</h2>
                     </li>
@@ -108,10 +101,10 @@ class Gallery extends React.Component{
       <div className="gallery-wrapper">
         <section className="gallery-upper-slide-warpper">
           <div className="swipe-arrows">
-            <div className="left-arrow" onClick={this.swipeLeft.bind(this)}>
+            <div className="left-arrow" onClick={this.handleSwipe.bind(this)}>
             <i className="fas fa-chevron-left"></i>
             </div>
-            <div className="right-arrow" onClick={this.swipeRight.bind(this)}>
+            <div className="right-arrow" onClick={this.handleSwipe.bind(this)}>
             <i className="fas fa-chevron-right"></i>
             </div>
           </div>
