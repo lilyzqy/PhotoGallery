@@ -5,19 +5,29 @@ class Gallery extends React.Component{
     super();
     this.state= {
       currentIndex: 0,
+      slideImageWidth: "",
+      slideImageHeight:""
     };
   }
+
+  // getDimensions(){
+  //   return({target:img})=>{
+  //     this.setState({slideImageHeight:img.offsetHeight,
+  //                    slideImageWidth: img.offsetWidth});
+  //   };
+  // }
 
   render(){
     const { items }= this.props;
     let slides= [];
     let thumbnails= [];
     items.forEach((item,index)=>{
-      const selectedClass= this.state.currentIndex === index ? "selected" : "";
-      const photo = this.state.currentIndex === index ? <img src={item.url}></img> : <div></div>;
-      const slide = (<div className={"slide "+ selectedClass}>
-                       {photo}
-                     </div>);
+      const slide = (this.state.currentIndex === index ?
+                    <div className="slide">
+                      <img className="slide-image" src={item.url} ></img>
+                      <h2 className="slide-caption">{item.caption}</h2>
+                    </div>
+                     : <div className="slide"></div>);
       slides.push(slide);
     });
     return(

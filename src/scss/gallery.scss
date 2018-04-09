@@ -10,9 +10,29 @@
 .gallery-upper-slide-warpper{
   height: 85%;
   width: 100%;
+  overflow: hidden;
 }
 
 .gallery-lower-thumbnails-wrapper{
   height: 15%;
   width: 100%;
+}
+
+.slide{
+  height: 100%;
+  position: relative;
+}
+
+.slide-image{
+  height: 100%;
+  margin: auto;
+  display: block;
+}
+
+.slide-caption{
+  color: white;
+  font-size: 20px;
+  position: relative;
+  top: -50px;
+  border-left: 20px;
 }
