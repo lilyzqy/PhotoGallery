@@ -36,7 +36,7 @@ class Gallery extends React.Component{
       nextIndex = 0;
     }
     return() => {
-      this.setState({currentIndex: nextIndex},()=>{console.log(this.state);});
+      this.setState({currentIndex: nextIndex});
     };
   }
 
@@ -46,16 +46,18 @@ class Gallery extends React.Component{
     let slides= [];
     let thumbnails= [];
     items.forEach((item,index)=>{
-      const slide = (this.state.currentIndex === index ?
+      const isCurrent = this.state.currentIndex === index;
+      const slide = ( isCurrent?
                     <li className="slide">
                       <img className="slide-image" src={item.url} ></img>
                       <h2 className="slide-caption">{item.caption}</h2>
                     </li>
                      : <li className="slide"></li>);
       slides.push(slide);
+      const selectedClass = isCurrent ? "selected" : "";
       const thumbnail = (<li
                         key={index}
-                        className="thumbnail"
+                        className={"thumbnail "+ selectedClass}
                         onClick={this.onClick(index)}>
                           <img className="thumbnail-image" src={item.url}></img>
                         </li>);
