@@ -6,7 +6,9 @@ class Gallery extends React.Component{
     this.state= {
       currentIndex: 0,
       startX:0,
-      beingTouched:false
+      beingTouched:false,
+      thumbnailsWidth:0,
+      offset:0
     };
   }
 
@@ -16,9 +18,20 @@ class Gallery extends React.Component{
   //                    slideImageWidth: img.offsetWidth});
   //   };
   // }
+
   onClick(index){
     return() => {
-      this.setState({currentIndex:index});
+      const imgWid=this.thumbnailsWrapper.offsetWidth;
+      const mid = imgWid/this.img.offsetWidth/2;
+      const { currentIndex } = this.state;
+      let transX;
+      if(index > mid && currentIndex === 0){
+        transX = (index - mid)* imgWid;
+      }else if(index !== currentIndex){
+        transX = (index - currentIndex)* imgWid;
+      }
+      this.setState({style:{transform: `translate(-${transX}px,0)`}});
+      this.setState({currentIndex:index,thumbnailsWidth:this.thumbnailsWrapper.offsetWidth});
     };
   }
 
@@ -27,7 +40,7 @@ class Gallery extends React.Component{
     if(nextIndex < 0){
       nextIndex = this.props.items.length - 1;
     }
-    this.setState({currentIndex: nextIndex});
+    this.setState({currentIndex: nextIndex,thumbnailsWidth:this.thumbnailsWrapper.offsetWidth});
   }
 
   swipeRight(){
@@ -35,7 +48,7 @@ class Gallery extends React.Component{
     if(nextIndex > this.props.items.length - 1){
       nextIndex = 0;
     }
-    this.setState({currentIndex: nextIndex});
+    this.setState({currentIndex: nextIndex,thumbnailsWidth:this.thumbnailsWrapper.offsetWidth});
   }
 
   handleSwiptStart(){
@@ -70,6 +83,7 @@ class Gallery extends React.Component{
       const isCurrent = this.state.currentIndex === index;
       const slide = ( isCurrent?
                     <li className="slide"
+                        key={index}
                         onMouseDown={this.handleSwiptStart()}
                         onMouseUp={this.handleSwiptEnd()}
                         onTouchStart={this.handleSwiptStart()}
@@ -84,7 +98,9 @@ class Gallery extends React.Component{
                         key={index}
                         className={"thumbnail "+ selectedClass}
                         onClick={this.onClick(index)}>
-                          <img className="thumbnail-image" src={item.url}></img>
+                          <img className="thumbnail-image"
+                               src={item.url}
+                               ref={el=>{this.img=el;}}></img>
                         </li>);
       thumbnails.push(thumbnail);
     });
@@ -100,12 +116,15 @@ class Gallery extends React.Component{
             </div>
           </div>
           <ul className="slides-ul">
-          {slides}
+            {slides}
           </ul>
         </section>
-        <section className="gallery-lower-thumbnails-wrapper">
-          <ul className="thumbnails-ul">
-          {thumbnails}
+        <section className="gallery-lower-thumbnails-wrapper"
+                 ref={el=>{this.thumbnailsWrapper=el;}}
+                 >
+          <ul className="thumbnails-ul"
+              style={this.state.style}>
+            {thumbnails}
           </ul>
         </section>
       </div>
