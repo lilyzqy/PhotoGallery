@@ -12,41 +12,42 @@ class Gallery extends React.Component{
     };
   }
 
-  // getDimensions(){
-  //   return({target:img})=>{
-  //     this.setState({slideImageHeight:img.offsetHeight,
-  //                    slideImageWidth: img.offsetWidth});
-  //   };
-  // }
-
-  onClick(index){
-    return() => {
-      const imgWid=this.thumbnailsWrapper.offsetWidth;
-      const mid = imgWid/this.img.offsetWidth/2;
-      const { currentIndex } = this.state;
-      let transX;
-      if(index > mid && currentIndex === 0){
-        transX = (index - mid)* imgWid;
-      }else if(index !== currentIndex){
-        transX = (index - currentIndex)* imgWid;
+  changeSlide(index){
+    const imgWid=this.thumbnailsWrapper.offsetWidth;
+    const mid= Math.ceil(imgWid/this.img.offsetWidth/2);
+    let { currentIndex, offset }= this.state;
+    if(index> mid && index< (this.props.items.length- mid+ 4)){
+      if(offset === 0){
+        offset= (mid - index);
+      }else{
+        offset= (offset+ currentIndex- index);
       }
-      this.setState({style:{transform: `translate(-${transX}px,0)`}});
-      this.setState({currentIndex:index,thumbnailsWidth:this.thumbnailsWrapper.offsetWidth});
+    }else if(index < mid){
+      offset= 0;
+    }
+    this.setState({style:{transform: `translate(${offset* imgWid/10}px,0)`},
+                   currentIndex:index,
+                   offset:offset});
+  }
+
+  handleClick(index){
+    return() => {
+      this.changeSlide(index);
     };
   }
 
   handleSwipe(e,dir){
     if(e && !dir){
-      dir = e.currentTarget.className=== "left-arrow" ? "left" : "right";
+      dir= e.currentTarget.className=== "left-arrow" ? "left" : "right";
     }
-    const delta = dir=== "left"? -1:1;
-    let nextIndex = this.state.currentIndex + delta;
-    if(nextIndex < 0){
-      nextIndex = this.props.items.length - 1;
-    }else if(nextIndex > this.props.items.length - 1){
-      nextIndex = 0;
+    const delta= dir=== "left"? -1:1;
+    let nextIndex= this.state.currentIndex+ delta;
+    if(nextIndex< 0){
+      nextIndex= this.props.items.length- 1;
+    }else if(nextIndex> this.props.items.length- 1){
+      nextIndex= 0;
     }
-    this.setState({currentIndex: nextIndex,thumbnailsWidth:this.thumbnailsWrapper.offsetWidth});
+    this.changeSlide(nextIndex);
   }
 
   handleSwipeStart(){
@@ -58,10 +59,10 @@ class Gallery extends React.Component{
 
   handleSwipeEnd(){
     return(event)=>{
-      const endX = event.clientX;
+      const endX= event.clientX;
       const { startX }= this.state;
-      const deltaX = startX - endX;
-      const swipeDir = (this.state.beingTouched && deltaX > 0) ? "left" : "right";
+      const deltaX= startX- endX;
+      const swipeDir= (this.state.beingTouched && deltaX> 0) ? "left" : "right";
       this.handleSwipe(undefined,swipeDir);
       this.setState({beingTouched:false});
     };
@@ -74,7 +75,7 @@ class Gallery extends React.Component{
     let thumbnails= [];
     items.forEach((item,index)=>{
       const isCurrent = this.state.currentIndex === index;
-      const slide = ( isCurrent?
+      const slide= ( isCurrent?
                     <li className="slide"
                         key={index}
                         onMouseDown={this.handleSwipeStart()}
@@ -86,11 +87,11 @@ class Gallery extends React.Component{
                     </li>
                      : <li className="slide"></li>);
       slides.push(slide);
-      const selectedClass = isCurrent ? "selected" : "";
-      const thumbnail = (<li
+      const selectedClass= isCurrent ? "selected" : "";
+      const thumbnail= (<li
                         key={index}
                         className={"thumbnail "+ selectedClass}
-                        onClick={this.onClick(index)}>
+                        onClick={this.handleClick(index)}>
                           <img className="thumbnail-image"
                                src={item.url}
                                ref={el=>{this.img=el;}}></img>
