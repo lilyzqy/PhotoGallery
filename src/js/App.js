@@ -8,7 +8,9 @@ class App extends React.Component{
     const items = photos;
     return(
       <div className="app">
-        <Gallery items = {items}/>
+        <div className="content">
+          <Gallery items = {items}/>
+        </div>
       </div>
     );
   }
