@@ -15,10 +15,31 @@ class Gallery extends React.Component{
   //   };
   // }
   onClick(index){
-    return ()=>{
-      this.setState({currentIndex:index},()=>{console.log(this.state);});
+    return() => {
+      this.setState({currentIndex:index});
     };
   }
+
+  swipeLeft(){
+    let nextIndex = this.state.currentIndex - 1;
+    if(nextIndex < 0){
+      nextIndex = this.props.items.length - 1;
+    }
+    return() => {
+      this.setState({currentIndex: nextIndex},()=>{console.log(this.state);});
+    };
+  }
+
+  swipeRight(){
+    let nextIndex = this.state.currentIndex + 1;
+    if(nextIndex > this.props.items.length - 1){
+      nextIndex = 0;
+    }
+    return() => {
+      this.setState({currentIndex: nextIndex},()=>{console.log(this.state);});
+    };
+  }
+
 
   render(){
     const { items }= this.props;
@@ -43,8 +64,14 @@ class Gallery extends React.Component{
     return(
       <div className="gallery-wrapper">
         <section className="gallery-upper-slide-warpper">
-          <i className="fas fa-chevron-left"></i>
-          <i className="fas fa-chevron-right"></i>
+          <div className="swipe-arrows">
+            <div className="left-arrow" onClick={this.swipeLeft()}>
+            <i className="fas fa-chevron-left"></i>
+            </div>
+            <div className="right-arrow" onClick={this.swipeRight()}>
+            <i className="fas fa-chevron-right"></i>
+            </div>
+          </div>
           <ul className="slides-ul">
           {slides}
           </ul>
