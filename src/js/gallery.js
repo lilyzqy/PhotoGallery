@@ -16,7 +16,7 @@ class Gallery extends React.Component{
   // }
   onClick(index){
     return ()=>{
-      this.setState({currentIndex:index});
+      this.setState({currentIndex:index},()=>{console.log(this.state);});
     };
   }
 
@@ -26,13 +26,14 @@ class Gallery extends React.Component{
     let thumbnails= [];
     items.forEach((item,index)=>{
       const slide = (this.state.currentIndex === index ?
-                    <div className="slide">
+                    <li className="slide">
                       <img className="slide-image" src={item.url} ></img>
                       <h2 className="slide-caption">{item.caption}</h2>
-                    </div>
-                     : <div className="slide"></div>);
+                    </li>
+                     : <li className="slide"></li>);
       slides.push(slide);
       const thumbnail = (<li
+                        key={index}
                         className="thumbnail"
                         onClick={this.onClick(index)}>
                           <img className="thumbnail-image" src={item.url}></img>
@@ -41,9 +42,9 @@ class Gallery extends React.Component{
     });
     return(
       <div className="gallery-wrapper">
-        <section className="gallery-upper-slide-warpper">
+        <ul className="gallery-upper-slide-warpper">
           {slides}
-        </section>
+        </ul>
         <ul className="gallery-lower-thumbnails-wrapper">
           {thumbnails}
         </ul>

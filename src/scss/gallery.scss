@@ -30,6 +30,7 @@
   height: 85%;
   width: 100%;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .gallery-lower-thumbnails-wrapper{
@@ -42,6 +43,7 @@
 .slide{
   height: 100%;
   position: relative;
+  float: left;
 }
 
 .slide-image{
