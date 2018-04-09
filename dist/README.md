@@ -1,6 +1,7 @@
-#Gallery
+# Gallery
 
 ## Preview
+![alt text](https://github.com/lilyzqy/PhotoGallery/blob/master/src/images/gallery.gif)
 
 ## Hightlights
 * Support multi-way swipe slide for better UX
