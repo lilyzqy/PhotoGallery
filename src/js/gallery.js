@@ -42,12 +42,16 @@ class Gallery extends React.Component{
     });
     return(
       <div className="gallery-wrapper">
-        <ul className="gallery-upper-slide-warpper">
+        <section className="gallery-upper-slide-warpper">
+          <ul className="slides-ul">
           {slides}
-        </ul>
-        <ul className="gallery-lower-thumbnails-wrapper">
+          </ul>
+        </section>
+        <section className="gallery-lower-thumbnails-wrapper">
+          <ul className="thumbnails-ul">
           {thumbnails}
-        </ul>
+          </ul>
+        </section>
       </div>
     );
   }

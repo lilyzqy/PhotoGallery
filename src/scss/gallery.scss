@@ -1,5 +1,5 @@
 .content{
-  width: 66vw;
+  width: 70vw;
   position: relative;
   margin: auto;
 }
@@ -21,10 +21,8 @@
 .content:before{
   content: "";
 	display: block;
-  padding-top: 70%;
+  padding-top: 66%;
 }
-
-
 
 .gallery-upper-slide-warpper{
   height: 90%;
@@ -38,6 +36,17 @@
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  margin-top: 10px;
+}
+
+.slides-ul{
+  width: 9999px;
+  height: 100%;
+}
+
+.thumbnails-ul{
+  width: 9999px;
+  height: 100%;
 }
 
 .slide{
@@ -63,7 +72,7 @@
 .thumbnail{
   display: block;
   height: 100%;
-  margin: 10px;
+  margin-right: 7px;
   text-align: center;
   float: left;
 }
