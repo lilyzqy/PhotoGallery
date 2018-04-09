@@ -1,0 +1,17 @@
+.gallery-wrapper{
+  height: 100vh;
+  width: 70vw;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+}
+
+.gallery-upper-slide{
+  height: 85%;
+  width: 100%;
+}
+
+.gallery-lower-thumbnails{
+  height: 15%;
+  width: 100%;
+}

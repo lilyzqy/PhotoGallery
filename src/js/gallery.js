@@ -1,12 +1,16 @@
 import React from 'react';
 
 class App extends React.Component{
+  constructor(){
+    super();
+  }
+
   render(){
     return(
       <div className="gallery-wrapper">
-        <section className="upper-slide">
+        <section className="gallery-upper-slide">
         </section>
-        <section className="upper-slide">
+        <section className="gallery-lower-thumbnails">
         </section>
       </div>
     );
