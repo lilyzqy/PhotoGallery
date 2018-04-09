@@ -4,9 +4,7 @@ class Gallery extends React.Component{
   constructor(){
     super();
     this.state= {
-      currentIndex: 0,
-      slideImageWidth: "",
-      slideImageHeight:""
+      currentIndex: 0
     };
   }
 
@@ -16,6 +14,11 @@ class Gallery extends React.Component{
   //                    slideImageWidth: img.offsetWidth});
   //   };
   // }
+  onClick(index){
+    return ()=>{
+      this.setState({currentIndex:index});
+    };
+  }
 
   render(){
     const { items }= this.props;
@@ -29,14 +32,21 @@ class Gallery extends React.Component{
                     </div>
                      : <div className="slide"></div>);
       slides.push(slide);
+      const thumbnail = (<li
+                        className="thumbnail"
+                        onClick={this.onClick(index)}>
+                          <img className="thumbnail-image" src={item.url}></img>
+                        </li>);
+      thumbnails.push(thumbnail);
     });
     return(
       <div className="gallery-wrapper">
         <section className="gallery-upper-slide-warpper">
           {slides}
         </section>
-        <section className="gallery-lower-thumbnails-wrapper">
-        </section>
+        <ul className="gallery-lower-thumbnails-wrapper">
+          {thumbnails}
+        </ul>
       </div>
     );
   }

@@ -14,6 +14,8 @@
 	left: 0;
 	bottom: 0;
 	right: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .content:before{
@@ -33,6 +35,8 @@
 .gallery-lower-thumbnails-wrapper{
   height: 15%;
   width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .slide{
@@ -52,4 +56,20 @@
   position: relative;
   top: -50px;
   margin-left: 20px;
+}
+
+.thumbnail{
+  display: block;
+  height: 100%;
+  margin: 20px;
+  text-align: center;
+  float: left;
+}
+
+.thumbnail:hover{
+  cursor: pointer;
+}
+
+.thumbnail-image{
+  height: 100%;
 }
