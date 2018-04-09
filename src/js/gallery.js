@@ -43,6 +43,8 @@ class Gallery extends React.Component{
     return(
       <div className="gallery-wrapper">
         <section className="gallery-upper-slide-warpper">
+          <i className="fas fa-chevron-left"></i>
+          <i className="fas fa-chevron-right"></i>
           <ul className="slides-ul">
           {slides}
           </ul>

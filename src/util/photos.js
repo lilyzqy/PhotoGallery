@@ -10,6 +10,12 @@ export const photos = [{url:"http://res.cloudinary.com/dreamhousesf/image/upload
                 url:"http://res.cloudinary.com/dreamhousesf/image/upload/v1523259039/Meiji_Shrine_Inner_Garden_Shibuya_spdbjx.jpg",
                 caption:"Meiji Shrine Inner Garden, Shibuya"
               },{
+                url:"http://res.cloudinary.com/dreamhousesf/image/upload/v1523266682/asia-japan-japanese-590478_2_fdw1jh.jpg",
+                caption:"Street view, Asakusa"
+              },{
+                url:"http://res.cloudinary.com/dreamhousesf/image/upload/v1523266684/architecture-contemporary-daylight-210547_2_akusa8.jpg",
+                caption:"Tranditional house, Akusa"
+              },{
                 url:"http://res.cloudinary.com/dreamhousesf/image/upload/v1523263393/ancient-art-asia-302100_2_msdg26.jpg",
                 caption:"Lake Toya, Hokkaido"
               },{
