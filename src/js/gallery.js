@@ -27,9 +27,7 @@ class Gallery extends React.Component{
     if(nextIndex < 0){
       nextIndex = this.props.items.length - 1;
     }
-    return() => {
-      this.setState({currentIndex: nextIndex});
-    };
+    this.setState({currentIndex: nextIndex});
   }
 
   swipeRight(){
@@ -37,9 +35,7 @@ class Gallery extends React.Component{
     if(nextIndex > this.props.items.length - 1){
       nextIndex = 0;
     }
-    return() => {
-      this.setState({currentIndex: nextIndex});
-    };
+    this.setState({currentIndex: nextIndex});
   }
 
   handleMouseDown(){
@@ -54,9 +50,12 @@ class Gallery extends React.Component{
       const endX = event.clientX;
       const { startX }= this.state;
       const deltaX = startX - endX;
-      console.log(startX);
-      const swipeDir = (this.state.beingTouched && deltaX > 0 && Math.abs(deltaX)> 3) ? "left" : "right";
-      console.log(swipeDir);
+      const swipeDir = (this.state.beingTouched && deltaX > 0) ? "left" : "right";
+      if(swipeDir=== "left"){
+        this.swipeLeft();
+      }else if (swipeDir=== "right") {
+        this.swipeRight();
+      }
     };
   }
 
@@ -89,10 +88,10 @@ class Gallery extends React.Component{
       <div className="gallery-wrapper">
         <section className="gallery-upper-slide-warpper">
           <div className="swipe-arrows">
-            <div className="left-arrow" onClick={this.swipeLeft()}>
+            <div className="left-arrow" onClick={this.swipeLeft.bind(this)}>
             <i className="fas fa-chevron-left"></i>
             </div>
-            <div className="right-arrow" onClick={this.swipeRight()}>
+            <div className="right-arrow" onClick={this.swipeRight.bind(this)}>
             <i className="fas fa-chevron-right"></i>
             </div>
           </div>
