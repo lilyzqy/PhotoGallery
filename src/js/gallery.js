@@ -4,7 +4,9 @@ class Gallery extends React.Component{
   constructor(){
     super();
     this.state= {
-      currentIndex: 0
+      currentIndex: 0,
+      startX:0,
+      beingTouched:false
     };
   }
 
@@ -26,7 +28,7 @@ class Gallery extends React.Component{
       nextIndex = this.props.items.length - 1;
     }
     return() => {
-      this.setState({currentIndex: nextIndex},()=>{console.log(this.state);});
+      this.setState({currentIndex: nextIndex});
     };
   }
 
@@ -40,6 +42,24 @@ class Gallery extends React.Component{
     };
   }
 
+  handleMouseDown(){
+    return(event)=>{
+      this.setState({startX:event.clientX,
+                     beingTouched:true});
+    };
+  }
+
+  handleMouseUp(){
+    return(event)=>{
+      const endX = event.clientX;
+      const { startX }= this.state;
+      const deltaX = startX - endX;
+      console.log(startX);
+      const swipeDir = (this.state.beingTouched && deltaX > 0 && Math.abs(deltaX)> 3) ? "left" : "right";
+      console.log(swipeDir);
+    };
+  }
+
 
   render(){
     const { items }= this.props;
@@ -48,7 +68,9 @@ class Gallery extends React.Component{
     items.forEach((item,index)=>{
       const isCurrent = this.state.currentIndex === index;
       const slide = ( isCurrent?
-                    <li className="slide">
+                    <li className="slide"
+                        onMouseDown={this.handleMouseDown()}
+                        onMouseUp={this.handleMouseUp()}>
                       <img className="slide-image" src={item.url} ></img>
                       <h2 className="slide-caption">{item.caption}</h2>
                     </li>
