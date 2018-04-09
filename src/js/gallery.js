@@ -38,14 +38,14 @@ class Gallery extends React.Component{
     this.setState({currentIndex: nextIndex});
   }
 
-  handleMouseDown(){
+  handleSwiptStart(){
     return(event)=>{
       this.setState({startX:event.clientX,
                      beingTouched:true});
     };
   }
 
-  handleMouseUp(){
+  handleSwiptEnd(){
     return(event)=>{
       const endX = event.clientX;
       const { startX }= this.state;
@@ -53,8 +53,10 @@ class Gallery extends React.Component{
       const swipeDir = (this.state.beingTouched && deltaX > 0) ? "left" : "right";
       if(swipeDir=== "left"){
         this.swipeLeft();
+        this.setState({beingTouched:false});
       }else if (swipeDir=== "right") {
         this.swipeRight();
+        this.setState({beingTouched:false});
       }
     };
   }
@@ -68,8 +70,10 @@ class Gallery extends React.Component{
       const isCurrent = this.state.currentIndex === index;
       const slide = ( isCurrent?
                     <li className="slide"
-                        onMouseDown={this.handleMouseDown()}
-                        onMouseUp={this.handleMouseUp()}>
+                        onMouseDown={this.handleSwiptStart()}
+                        onMouseUp={this.handleSwiptEnd()}
+                        onTouchStart={this.handleSwiptStart()}
+                        onTouchEnd={this.handleSwiptEnd()}>
                       <img className="slide-image" src={item.url} ></img>
                       <h2 className="slide-caption">{item.caption}</h2>
                     </li>
