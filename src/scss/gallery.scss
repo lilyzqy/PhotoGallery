@@ -123,9 +123,6 @@
   .gallery-upper-slide-warpper{
     height: 100%;
   }
-  .gallery-lower-thumbnails-wrapper{
-    visibility: hidden;
-  }
 
   .fa-w-10{
     font-size: 20px;
@@ -133,5 +130,10 @@
 
   .swipe-arrows{
     top: 30%;
+  }
+
+  .slide-caption{
+    font-size: 14px;
+    top: -30px;
   }
 }
