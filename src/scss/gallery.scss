@@ -39,6 +39,7 @@
   margin-top: 10px;
 }
 
+
 .slides-ul{
   width: 9999px;
   height: 100%;
@@ -116,4 +117,21 @@
   font-size: 60px;
   z-index: 2;
   color: grey;
+}
+
+@media screen and (max-width: 600px) {
+  .gallery-upper-slide-warpper{
+    height: 100%;
+  }
+  .gallery-lower-thumbnails-wrapper{
+    visibility: hidden;
+  }
+
+  .fa-w-10{
+    font-size: 20px;
+  }
+
+  .swipe-arrows{
+    top: 30%;
+  }
 }

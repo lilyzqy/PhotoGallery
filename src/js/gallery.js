@@ -47,6 +47,7 @@ class Gallery extends React.Component{
     }
     const delta= dir=== "left"? -1:1;
     let nextIndex= this.state.currentIndex+ delta;
+    //infinite scroll thumbnails
     if(nextIndex< 0){
       nextIndex= this.props.items.length- 1;
     }else if(nextIndex> this.props.items.length- 1){
@@ -67,7 +68,8 @@ class Gallery extends React.Component{
       const endX= event.clientX;
       const { startX }= this.state;
       const deltaX= startX- endX;
-      const swipeDir= (this.state.beingTouched && deltaX< 0) ? "left" : "right";
+      console.log(deltaX);
+      const swipeDir= (this.state.beingTouched && deltaX> 0) ? "left" : "right";
       this.handleSwipe(undefined,swipeDir);
       this.setState({beingTouched:false});
     };
