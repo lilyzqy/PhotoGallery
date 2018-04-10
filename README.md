@@ -4,7 +4,9 @@
 ![alt text](https://github.com/lilyzqy/PhotoGallery/blob/master/src/images/gallery.gif)
 
 ## Hightlights
+* Fully responsive site
 * Support multi-way swipe slide for better UX
+* infinite scrolling thumbnails
 * Smooth thumbnails render
 
 ## Set up instruction

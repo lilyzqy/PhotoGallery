@@ -13,19 +13,24 @@ class Gallery extends React.Component{
   }
 
   changeSlide(index){
-    const imgWid=this.thumbnailsWrapper.offsetWidth;
-    const mid= Math.ceil(imgWid/this.img.offsetWidth/2);
+    const thumbnailsWrapperWidth= this.thumbnailsWrapper.offsetWidth;
+    const imgWid= this.img.offsetWidth;
+    const showingImgNumber = thumbnailsWrapperWidth/imgWid;
+    const mid= Math.ceil(showingImgNumber/2);
+    const totalImgNumber = this.props.items.length;
     let { currentIndex, offset }= this.state;
-    if(index> mid && index< (this.props.items.length- mid+ 4)){
+    if(index>= mid && index< (totalImgNumber- mid+ 4)){
       if(offset === 0){
         offset= (mid - index);
       }else{
         offset= (offset+ currentIndex- index);
       }
-    }else if(index < mid){
+    }else if(index< mid){
       offset= 0;
+    }else if(index=== totalImgNumber- 1){
+      offset= Math.floor(showingImgNumber)- totalImgNumber - 2;
     }
-    this.setState({style:{transform: `translate(${offset* imgWid/10}px,0)`},
+    this.setState({style:{transform: `translate(${offset* imgWid}px,0)`},
                    currentIndex:index,
                    offset:offset});
   }
