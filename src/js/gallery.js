@@ -11,7 +11,7 @@ class Gallery extends React.Component{
       offset:0
     };
   }
-  
+
   componentDidMount(){
     window.addEventListener("keyup",this.handleKeyPress.bind(this));
   }
@@ -44,7 +44,7 @@ class Gallery extends React.Component{
       this.changeSlide(index);
     };
   }
-  
+
   handleKeyPress(e){
     const key = parseInt(e.keyCode);
     const LEFT_ARROW = 37;
@@ -52,6 +52,7 @@ class Gallery extends React.Component{
     switch(key) {
       case LEFT_ARROW:
           this.handleSwipe(undefined,"left");
+          break;
       case RIGHT_ARROW:
           this.handleSwipe(undefined,"right");
     }
@@ -61,6 +62,7 @@ class Gallery extends React.Component{
     if(e && !dir){
       dir= e.currentTarget.className=== "left-arrow" ? "left" : "right";
     }
+    console.log(dir);
     const delta= dir=== "left"? -1:1;
     let nextIndex= this.state.currentIndex+ delta;
     //infinite scroll thumbnails
