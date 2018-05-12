@@ -11,6 +11,10 @@ class Gallery extends React.Component{
       offset:0
     };
   }
+  
+  componentDidMount(){
+    window.addEventListener("keyup",this.handleKeyPress.bind(this));
+  }
 
   changeSlide(index){
     const thumbnailsWrapperWidth= this.thumbnailsWrapper.offsetWidth;
@@ -30,7 +34,7 @@ class Gallery extends React.Component{
     }else if(index=== totalImgNumber- 1){
       offset= Math.floor(showingImgNumber)- totalImgNumber - 2;
     }
-    this.setState({style:{transform: `translate(${offset* imgWid}px,0)`},
+    this.setState({style:{transform: `translate(${offset * imgWid}px,0)`},
                    currentIndex:index,
                    offset:offset});
   }
@@ -39,6 +43,18 @@ class Gallery extends React.Component{
     return() => {
       this.changeSlide(index);
     };
+  }
+  
+  handleKeyPress(e){
+    const key = parseInt(e.keyCode);
+    const LEFT_ARROW = 37;
+    const RIGHT_ARROW = 39;
+    switch(key) {
+      case LEFT_ARROW:
+          this.handleSwipe(undefined,"left");
+      case RIGHT_ARROW:
+          this.handleSwipe(undefined,"right");
+    }
   }
 
   handleSwipe(e,dir){
